@@ -1,23 +1,21 @@
 import pandas as pd
+import sys
 
-category_index = 1
-test_index = 2
+import attributes
 
-folder_path = "data"
-input_file = "{path}/file-test.csv".format(path=folder_path)
-output_file = "{path}/python-output-aggregator.csv".format(path=folder_path)
+input_file = sys.argv[1]
+output_file = sys.argv[2]
 
+print ("reading file {file}".format(file=input_file))
 data = pd.read_csv(input_file, header=None, index_col=0)
 
-aggregator = data.groupby([category_index, test_index], sort=True).value_counts()
-aggregator.to_csv(output_file, header=None)
-report = ""
+print ("aggregating results")
+aggregator = data.groupby([attributes.TEST_CATEGORY_INDEX, attributes.TEST_RESULT_INDEX], sort=True) \
+                .value_counts() \
+                .reset_index() \
+                .sort_values([attributes.TEST_CATEGORY_INDEX, attributes.TEST_RESULT_INDEX], ascending=True)
 
-for tuple in aggregator.keys():
-    if tuple[0] not in report:
-        report = "{report}\n{category}: ".format(report=report, category=tuple[0])
-    else:
-        report = "{report}, ".format(report=report)
-    report = "{report} {count} {test}".format(report=report, count=str(aggregator[tuple]), test=tuple[1])
+print ("writing output file {file}".format(file=output_file))
+aggregator.to_csv(output_file, header=None, index=False)
 
-print (report)
+print ("...success")
