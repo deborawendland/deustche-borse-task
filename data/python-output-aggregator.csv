@@ -1,0 +1,6 @@
+Deposit,PASS,2
+Deposit,FAIL,1
+Deposit,SKIP,1
+Withdrawal,FAIL,2
+Withdrawal,PASS,1
+Withdrawal,SKIP,1
