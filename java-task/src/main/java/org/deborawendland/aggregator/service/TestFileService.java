@@ -1,0 +1,28 @@
+package org.deborawendland.aggregator.service;
+
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import org.deborawendland.aggregator.model.Test;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
+import java.util.List;
+
+public class TestFileService {
+
+    public List<Test> parseCSV (MultipartFile file){
+        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+            CsvToBean<Test> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(Test.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            return csvToBean.parse();
+
+        } catch (IOException e) {
+            // todo add exception handling
+            return null;
+        }
+    }
+}
