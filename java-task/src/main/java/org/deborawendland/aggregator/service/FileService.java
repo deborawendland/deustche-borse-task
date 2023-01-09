@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.util.List;
 
-public class TestFileService {
+public class FileService {
 
     public List<Test> parseCSV (MultipartFile file){
         try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
