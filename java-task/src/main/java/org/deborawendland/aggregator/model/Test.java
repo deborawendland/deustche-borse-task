@@ -17,9 +17,7 @@ public class Test {
         this.result = result;
     }
 
-    public Test(){
-
-    }
+    public Test(){}
 
     public String getName() {
         return name;
@@ -43,14 +41,5 @@ public class Test {
 
     public void setResult(String result) {
         this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", result='" + result + '\'' +
-                '}';
     }
 }

@@ -2,8 +2,8 @@ package org.deborawendland.aggregator.service;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.deborawendland.aggregator.exceptions.CSVParsingException;
 import org.deborawendland.aggregator.model.Test;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -21,8 +21,7 @@ public class TestFileService {
             return csvToBean.parse();
 
         } catch (IOException e) {
-            // todo add exception handling
-            return null;
+            throw new CSVParsingException("Error parsing .csv file");
         }
     }
 }
